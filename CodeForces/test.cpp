@@ -1,67 +1,91 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define pb push_back
-#define mp make_pair
-#define vi vector< int >
-#define vl vector< ll >
-#define ss second
-#define ff first
+#include <bits/stdc++.h> 
+using namespace std; 
+  
 #define ll long long
-#define lld long long double
-#define pii pair< int,int >
-#define pll pair< ll,ll >
-#define sz(a) a.size()
-#define all(a) a.begin(),a.end()
-#define tri pair<int,pii>
-#define vii vector<pii>
-#define vll vector<pll>
-#define viii vector<tri>
-#define f(i,a,b) for(ll i=a;i<b;i++)
-#define rep(i,n) f(i,0,n)
-#define fd(i,a,b) for(ll i=a;i>=b;i--)
-#define repd(i,n) fd(i,n,0)
-#define pqueue priority_queue< int >
-#define pdqueue priority_queue< int,vi ,greater< int > >
-#define flush fflush(stdout) 
-#define printv(v)         \
-    for (auto x : v)      \
-        cout << x << ' '; \
-    br;
-#define br cout << "\n";
-#define testc() \
-    ll t;       \
-    cin >> t;   \
-    while (t--)
-#define maxd1 998244353
-#define basP 233
-#define eps 1e-8 
-#define INF INT_MAX
-#define INFL LLONG_MAX
-#define puts(n) cout << n;
-#define vl2d vector<vector<ll>>
-#define vi2d vector<vector<int>>
-#define mset(m, v) memset(m, v, sizeof(m))
-#define setbits(x) __builtin_popcount(x)
-#define primeDEN 727999983
+#define FORI(a, b, i, inc) for(ll i = a; i < b; i = i + inc)
+#define FOR(a, b, i) for(ll i = a; i < b; i++)
+#define F first
+#define S second
+#define pb push_back
+#define eb emplace_back
+#define test ll t; cin>>t; while(t--)
+#define vec vector
+#define all(v) v.begin(), v.end()
+#define fast ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+
+bool compare(ll a, ll b){
+    return a > b;
+}
+
 int main()
 {
-	int n,k;
-	cin>>n>>k;
-	int a[n];
-	int result;
-	int i;
-	rep(i,n)
-		cin>>a[i];
-	int b=a[k-1];
-	if(b>0)
-	{
-		for(i=k;i<n && a[i]==b;i++);
-		result = i-1;
-	}
-	else{
-		for(i=k;i>=0 && a[i]<=0;i--);
-		result = i+1;
-	}
-	cout<<result;
+    test{
+       ll n; cin>>n;
+       ll k; cin>>k;
+       
+       vec<ll> v(n);
+ 
+       FOR(0, n, i){ cin>>v[i];};
+       
+       sort(all(v));
+       
+       stack<ll> st;
+       
+       FOR(0, n, i) st.push(v[i]);
+       
+       
+       
+       vec<ll> w(k);
+       FOR(0, k, i) cin>>w[i];
+       
+       sort(all(w));
+       
+       ll ans = 0;
+       
+       ll j = 0;
+       FOR(0, k, i){
+           ll count = w[i];
+           
+           unordered_set<ll> uniq;
+           vec<ll> temp;
+           
+           ll maxe = LONG_MIN, mine = LONG_MAX;
+           
+           while(j<n && uniq.size() != count&& st.size() > 0){
+                ll prev_size = uniq.size();
+                
+                ll ele = st.top();
+                uniq.insert(st.top());
+                st.pop();
+                
+                ll new_size = uniq.size();
+                
+                
+                if(prev_size == new_size){
+                    temp.pb(ele);
+                }else{
+                    maxe = max(maxe, ele);
+                    mine = min(mine, ele);
+                }
+           }
+           
+           ll diff = 0;
+           if(uniq.size() != count){
+              diff = count - uniq.size();
+           }
+           
+           for(j = temp.size()-1 - diff ; j >= 0; j--){
+               st.push(temp[j]);
+           }
+           
+           ans+= (maxe + mine);
+       }
+       
+       cout<<ans<<endl;
+       
+       
+    }
+
 	return 0;
 }

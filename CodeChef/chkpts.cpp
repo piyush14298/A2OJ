@@ -1,30 +1,21 @@
-
-/////////////////             ____ ___ _ _  _           *******************************
-/////////////////            |  _ \_ _/ | || |          *******************************
-/////////////////            | |_) | || | || |_         *******************************
-/////////////////            |  __/| || |__   _|        *******************************
-/////////////////            |_|  |___|_|  |_|          *******************************
-
-#include<bits/stdc++.h>
-// #include<iostream>
-// #include<vector>
-// #include<stack>
-// #include<queue>
-// #include<unordered_map>
-// #include<set>
-// #include<algorithm>
+// #include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
+#include<stack>
+#include<queue>
+#include<unordered_map>
 using namespace std;
 #define int int64_t
 #define ll int
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
-#define fo(i,a,b) for(ll i=a;i<b;i++)
+#define fo(i,a,b) for(ll i=a;i<=b;i++)
 #define vi vector<int>
 #define vll vector<ll>
 #define vull vector<ull>
 #define endl "\n"
 
-struct Point 
+struct point 
 { 
     int x, y; 
 }; 
@@ -35,13 +26,13 @@ ll getInt() {
 }
 vll getVector(int n) {
     vll temp(n);
-    fo(i,0,n) {
+    fo(i,0,n-1) {
         cin>>temp[i];
     }
     return temp;
 }
 void printVector(vector<ll> a) {
-    fo(i,0,a.size()) {
+    fo(i,0,a.size()-1) {
         cout<<a[i]<<" ";
     }
     cout<<endl;
@@ -62,7 +53,18 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
-
+    int n,c;
+    cin>>n>>c;
+    unordered_map<int,vector<point> > chk;
+    for(int i=0;i<n;i++) {
+        int x,y;
+        cin>>x>>y;
+        chk[x-y].push_back({x,y});
+    }
+    for(auto p: chk) {
+        auto v = p.second;
+        // vector<points>
+    }
 }
 
 int32_t main() {

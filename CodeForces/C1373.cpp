@@ -6,16 +6,9 @@
 /////////////////            |_|  |___|_|  |_|          *******************************
 
 #include<bits/stdc++.h>
-// #include<iostream>
-// #include<vector>
-// #include<stack>
-// #include<queue>
-// #include<unordered_map>
-// #include<set>
-// #include<algorithm>
 using namespace std;
 #define int int64_t
-#define ll int
+#define ll long long
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
 #define fo(i,a,b) for(ll i=a;i<b;i++)
@@ -61,8 +54,61 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+// int abs(int a) {
+//     return a<0?-a:a;
+// }
 
+void solve() {
+    string s;
+    cin>>s;
+    // cout<<s<<endl;
+    int sm = 1;
+    int present = 0;
+    vector<int> currs(s.size());
+    for(int i=0;i<s.size();i++) {
+        char c = s[i];
+        if(c=='+'){
+            present++;
+            // cout<<c;
+        }
+        else if(c=='-'){
+            present--;
+            // cout<<c;
+        }
+        // cout<<present<<endl;
+        currs[i] = present;
+        sm = min(sm,present);
+    }
+    // cout<<sm<<endl;
+    // int limit = abs(sm);
+    if(sm >= 0) {
+        cout<<s.size()<<endl;
+        return;
+    }
+    // cout<<limit<<endl;
+    int ret=0;
+    int limit = abs(sm)+1;
+    ret+=limit;
+    int last=ret;
+    for(int i=1;i<currs.size();i++) {
+        if(currs[i-1] >= 0) {
+            ret+=last=min(last,limit);
+        } else {
+            ret+=last = min(last,(limit - abs(currs[i-1])));
+        }
+
+    }
+
+    // fo(i,sm,1) {
+    //     int temp=0;
+    //     // i *= -1;
+    //     do {
+    //         temp++;
+    //     }
+    //     while(temp < currs.size() && i<=currs[temp-1]);
+    //     ret+=temp;
+    // }
+    cout<<ret<<endl;
 }
 
 int32_t main() {

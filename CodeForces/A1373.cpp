@@ -62,7 +62,15 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
-
+    int a1, a2, c1, c2, d;
+    a1=a2=-1;
+    
+    cin>>c1>>d>>c2;
+    if(c2>c1)a1=1;
+    c2=c2/d;
+    if(c2<c1)
+    a2=d;
+    cout<<a1<<" "<<a2<<endl;
 }
 
 int32_t main() {

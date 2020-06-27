@@ -61,9 +61,50 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+bool get(string s) {
+    if(s.size()<2) {
+        return false;
+    }
+    if(s.size()==2 && s[0]==s[1]) {
+        return false;
+    }
+    if(s.size()==2) {
+        return true;
+    }
 
+    bool ret = false;
+
+    for(int i=0;i<s.size()-1;i++) {
+        if(s[i]!=s[i+1]) {
+            if(!get(s.substr(0,i) + (i==s.size()-2?"":s.substr(i+2,s.size()-i-2)))) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
+
+void solve() { 
+    int i=0;
+    string str;
+    cin>>str;
+    int count0=0, count1=0;
+    while(i<str.length())
+    {
+        if(str[i]=='0') {
+            count0++;
+        } else {
+            count1++;
+        }
+        i++;
+    }
+    int res = min(count0, count1);
+    if(res%2 !=0)
+    cout<<"DA"<<endl;
+    else
+    cout<<"NET"<<endl;
+}
+
 
 int32_t main() {
     GO_BABY_GO;
