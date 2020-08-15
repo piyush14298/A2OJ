@@ -37,7 +37,58 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    vector<int> nums(n);
+    unordered_map<int,int> count;
+    for(int i=0;i<n;i++) {
+        cin>>nums[i];
+        count[nums[i]]++;
+    }
+    int high = 0, num;
+    for(auto i: count) {
+        if(i.second > high) {
+            num = i.first;
+            high = i.second;
+        }
+    }
 
+    int l=0,h=count.size()-1;
+    int ans;
+
+    while(l<=h) {
+        int mid = l + (h-l)/2;
+
+        unordered_map<int, int> temp = count;
+        bool completed = true;
+        for(int i=0;i<high-1;i++) {
+            int c=0;
+            for(auto& i:temp) {
+                if(i.first == num) {
+                    continue;
+                }
+                if(i.second) {
+                    c++;
+                    i.second--;
+                }
+                if(c == mid) {
+                    break;
+                }
+            }
+            if(c!=mid) {
+                completed = false;
+                break;
+            }
+        }
+        if(completed) {
+            ans = mid;
+            l=mid+1;
+        } else {
+            h = mid-1;
+        }
+    }
+
+    cout<<ans<<endl;
 }
 
 int32_t main() {

@@ -18,9 +18,34 @@ using namespace std;
 #define ll int
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
+#define fo(i,a,b) for(ll i=a;i<b;i++)
+#define vi vector<int>
+#define vll vector<ll>
+#define vull vector<ull>
 #define endl "\n"
 
-
+struct Point 
+{ 
+    int x, y; 
+}; 
+ll getInt() {
+    ll t;
+    cin>>t;
+    return t;
+}
+vll getVector(int n) {
+    vll temp(n);
+    fo(i,0,n) {
+        cin>>temp[i];
+    }
+    return temp;
+}
+// void printVector(vector<ll> a) {
+//     fo(i,0,a.size()) {
+//         cout<<a[i]<<" ";
+//     }
+//     cout<<endl;
+// }
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
 
@@ -36,14 +61,76 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+char bitScore(int a) {
+    vector<int> digits;
+    while(a) {
+        digits.push_back(a%10);
+        a/=10;
+    }
+    sort(digits.begin(), digits.end());
+    int ret = digits[0]*7 + digits[2]*11;
+    string ans = to_string(ret);
+    if(ans.size()>2) {
+        return ans[1];
+    } 
+    return ans[0];
+}
 
+
+void solve() {
+    int n;
+    cin>>n;
+    vector<char> nums(n);
+    for(int i=0;i<n;i++) {
+        int a;
+        cin>>a;
+        nums[i] = bitScore(a);
+        // cout<<nums[i]<<" ";
+    }
+    // cout<<endl;
+
+    unordered_map<char,int> even;
+    unordered_map<char,int> odd;
+
+    for(int i=0;i<n;i++) {
+        if(i&1) {
+            odd[nums[i]]++;
+        } else {
+            even[nums[i]]++;
+        }
+    }
+
+    int ret=0;
+
+    unordered_map<char,int> res;
+
+    for(auto i: even) {
+        if(i.second > 1) {
+            if(i.second > 2) {
+                res[i.first]++;
+            }
+            res[i.first]++;
+        }
+    }
+    for(auto i: odd) {
+        if(i.second > 1) {
+            if(i.second > 2) {
+                res[i.first]++;
+            }
+            res[i.first]++;
+        }
+    }
+
+    for(auto i: res) {
+        ret+=min(2,i.second);
+    }
+
+    cout<<ret<<endl;
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t = 1;
     while(t--) {
         solve();
     }

@@ -37,13 +37,63 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    unordered_map<int, int> planks;
+    for(int i=0;i<n;i++) {
+        int a;
+        cin>>a;
+        planks[a]++;
+    }
+    
+    int q;
+    cin>>q;
+    int fours=0, twos=0;
+    for(auto i: planks) {
+        fours+=(i.second)/4;
+        twos+=(i.second % 4) /2;
+    }
 
+    while(q--) {
+        char c;
+        int a;
+        cin>>c>>a;
+        int prev = planks[a];
+        if(c=='+') {
+            int c = planks[a]%4;
+
+            if(c==1) {
+                twos++;
+            } else if(c==3) {
+                twos--;
+                fours++;
+            }
+            
+            planks[a]++;
+
+        } else {
+            planks[a]--;
+            int c = prev%4;
+            if(c==0) {
+                fours--;
+                twos++;
+            } else if(c==2) {
+                twos--;
+            }
+        }
+        
+        if(fours>1 || (fours==1 && twos>1)) {
+            cout<<"YES"<<endl;
+        } else {
+            cout<<"NO"<<endl;
+        }
+    }
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t=1;
+    // cin>>t;
     while(t--) {
         solve();
     }

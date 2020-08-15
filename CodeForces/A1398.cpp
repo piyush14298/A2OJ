@@ -37,7 +37,18 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    vector<int> nums(n);
+    for(int i=0;i<n;i++) {
+        cin>>nums[i];
+    }
 
+    if(nums[0]+nums[1] <= nums[n-1]) {
+        cout<<"1 2 "<<n<<endl;
+    } else {
+        cout<<-1<<endl;
+    }
 }
 
 int32_t main() {

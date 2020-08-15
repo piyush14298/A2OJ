@@ -37,7 +37,29 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    string s;
+    cin>>s;
+    vector<int> sizes;
 
+    int i=0, count=0;
+
+    while(i<s.size()) {
+        if(s[i]=='0') {
+            if(count>=1) sizes.push_back(count);
+            count=0;
+        } else {
+            count++;
+        }
+        i++;
+    }
+    if(count>=1) sizes.push_back(count);
+
+    sort(sizes.begin(), sizes.end(),greater<int>());
+    int ret=0;
+    for(int i=0;i<sizes.size();i+=2) {
+        ret+=sizes[i];
+    }
+    cout<<ret<<endl;
 }
 
 int32_t main() {

@@ -37,7 +37,9 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
-
+    int n;
+    cin>>n;
+    cout<<(n/2)+1<<endl;
 }
 
 int32_t main() {

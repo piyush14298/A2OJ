@@ -18,9 +18,34 @@ using namespace std;
 #define ll int
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
+#define fo(i,a,b) for(ll i=a;i<b;i++)
+#define vi vector<int>
+#define vll vector<ll>
+#define vull vector<ull>
 #define endl "\n"
 
-
+struct Point 
+{ 
+    int x, y; 
+}; 
+ll getInt() {
+    ll t;
+    cin>>t;
+    return t;
+}
+vll getVector(int n) {
+    vll temp(n);
+    fo(i,0,n) {
+        cin>>temp[i];
+    }
+    return temp;
+}
+void printVector(vector<ll> a) {
+    fo(i,0,a.size()) {
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
+}
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
 
@@ -37,13 +62,39 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    vector<int> cand(n), orange(n), candDiff(n), orangeDiff(n);
+    for(int i=0;i<n;i++) {
+        cin>>cand[i];
+    }
+    for(int i=0;i<n;i++) {
+        cin>>orange[i];
+    }
 
+    int minC = *min_element(cand.begin(), cand.end());
+    int minO = *min_element(orange.begin(), orange.end());
+
+    for(int i=0;i<n;i++) {
+        candDiff[i] = cand[i] - minC;
+    }
+    for(int i=0;i<n;i++) {
+        orangeDiff[i] = orange[i] - minO;
+    }
+
+    int ret = 0;
+
+    for(int i=0;i<n;i++) {
+        ret += max(candDiff[i], orangeDiff[i]);
+    }
+
+    cout<<ret<<endl;
+    return;
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t = getInt();
     while(t--) {
         solve();
     }

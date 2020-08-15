@@ -18,8 +18,28 @@ using namespace std;
 #define ll int
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
+#define fo(i,a,b) for(ll i=a;i<b;i++)
+#define vi vector<int>
+#define vll vector<ll>
+#define vull vector<ull>
 #define endl "\n"
 
+struct Point 
+{ 
+    int x, y; 
+}; 
+ll getInt() {
+    ll t;
+    cin>>t;
+    return t;
+}
+vll getVector(int n) {
+    vll temp(n);
+    fo(i,0,n) {
+        cin>>temp[i];
+    }
+    return temp;
+}
 
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
@@ -36,14 +56,38 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+int helper(int a, int b) {
+    int ret=0;
 
+    while(a!=b) {
+        ret++;
+        int t = abs(a-b);
+        b = min(a,b);
+        a = t;
+    }
+    ret++;
+
+    return ret;
+}
+
+
+void solve() {
+    int p,q,r,s;
+    cin>>p>>q>>r>>s;
+    int ret=0;
+
+    for(int i=p;i<=q;i++) {
+        for(int j=r;j<=s;j++) {
+            ret+=helper(i,j);
+        }
+    }
+
+    cout<<ret<<endl;
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t = 1;
     while(t--) {
         solve();
     }

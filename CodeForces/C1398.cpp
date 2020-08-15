@@ -36,8 +36,27 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+vector<int> sums;
 
+void solve() {
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+
+    map<int,int> h;
+    h[0]++;
+
+    int sum=0, ret=0;
+
+    for(int i=0;i<n;i++) {
+        int t = s[i]-'0';
+        sum+=t;
+        ret+=h[sum - (i+1)];
+        h[sum - (i+1)]++;
+    }
+
+    cout<<ret<<endl;
 }
 
 int32_t main() {

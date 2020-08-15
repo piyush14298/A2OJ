@@ -14,13 +14,38 @@
 // #include<set>
 // #include<algorithm>
 using namespace std;
-#define int int64_t
-#define ll int
+// #define int int64_t
+#define ll long long 
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
+#define fo(i,a,b) for(ll i=a;i<b;i++)
+#define vi vector<int>
+#define vll vector<ll>
+#define vull vector<ull>
 #define endl "\n"
 
-
+struct Point 
+{ 
+    int x, y; 
+}; 
+ll getInt() {
+    ll t;
+    cin>>t;
+    return t;
+}
+vll getVector(int n) {
+    vll temp(n);
+    fo(i,0,n) {
+        cin>>temp[i];
+    }
+    return temp;
+}
+// void printVector(vector<ll> a) {
+//     fo(i,0,a.size()) {
+//         cout<<a[i]<<" ";
+//     }
+//     cout<<endl;
+// }
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
 
@@ -36,14 +61,51 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
 
+
+void helper(vector<int>& nums, int index, int curr, int& ret, int& sum) {
+    if(index == (int) nums.size()) {
+        if(curr*2 >= sum) {
+            ret = min(curr, ret);
+        }
+        return;
+    }
+
+    helper(nums, index+1, curr, ret, sum);
+
+    curr+=nums[index];
+
+    if(curr*2 >= sum) {
+        helper(nums, nums.size(), curr, ret, sum);
+    }
+    helper(nums, index+1, curr, ret, sum);
+}
+
+void solve() {
+    string input;
+    getline(cin, input);
+    // cout<<input<<endl;
+    stringstream ss(input);
+    int t;
+    vector<int> nums;
+    while(ss>>t) {
+        // cout<<t<<" ";
+        nums.push_back(t);
+    
+    }
+    // cout<<end/l;
+    sort(nums.begin(), nums.end());
+    int sum = accumulate(nums.begin(), nums.end(),0);
+    int ret = sum;
+
+    helper(nums,0,0,ret,sum);
+
+    cout<<ret;
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t = 1;
     while(t--) {
         solve();
     }

@@ -18,9 +18,34 @@ using namespace std;
 #define ll int
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
+#define fo(i,a,b) for(ll i=a;i<b;i++)
+#define vi vector<int>
+#define vll vector<ll>
+#define vull vector<ull>
 #define endl "\n"
 
-
+struct Point 
+{ 
+    int x, y; 
+}; 
+ll getInt() {
+    ll t;
+    cin>>t;
+    return t;
+}
+vll getVector(int n) {
+    vll temp(n);
+    fo(i,0,n) {
+        cin>>temp[i];
+    }
+    return temp;
+}
+void printVector(vector<ll> a) {
+    fo(i,0,a.size()) {
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
+}
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
 
@@ -36,14 +61,45 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
 
+void solve() {
+    int n;
+    cin>>n;
+    vector<int> nums(n);
+    for(int i=0;i<n;i++) {
+        cin>>nums[i];
+    }
+
+    int ret = 0, w;
+    vector<int> present(101,0);
+
+    for(int i:nums) {
+        present[i]++;
+    } 
+
+    for(int i=2;i<=100;i++) {
+        int temp=0;
+        vector<int> tempPresent(present.begin(), present.end());
+        for(int j=0;j<n;j++) {
+            if(i > nums[j] && present[i-nums[j]] > 0) {
+                temp++;
+                present[i-nums[j]]--;
+            }
+        }
+        temp/=2;
+        if(temp > ret) {
+            w=i;
+        }
+        ret=max(ret,temp);
+        swap(present, tempPresent);
+    }
+
+    cout<<ret<<endl;
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t = getInt();
     while(t--) {
         solve();
     }

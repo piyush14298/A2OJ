@@ -15,12 +15,37 @@
 // #include<algorithm>
 using namespace std;
 #define int int64_t
-#define ll int
+#define ll long long
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
+#define fo(i,a,b) for(ll i=a;i<b;i++)
+#define vi vector<int>
+#define vll vector<ll>
+#define vull vector<ull>
 #define endl "\n"
 
-
+// struct Point 
+// { 
+//     int x, y; 
+// }; 
+// ll getInt() {
+//     ll t;
+//     cin>>t;
+//     return t;
+// }
+// vll getVector(int n) {
+//     vll temp(n);
+//     fo(i,0,n) {
+//         cin>>temp[i];
+//     }
+//     return temp;
+// }
+// void printVector(vector<ll> a) {
+//     fo(i,0,a.size()) {
+//         cout<<a[i]<<" ";
+//     }
+//     cout<<endl;
+// }
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
 
@@ -36,13 +61,45 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+ull gcd(ull a, ull b) {
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
 
+void solve() {
+    int n;
+    cin>>n;
+    vector<int> nums(n);
+    for(int i=0;i<n;i++) {
+        int a;
+        cin>>a;
+        nums[i] = a-1;
+    }
+    // vector<int> times;
+    ull ret=1;
+    vector<bool> seen(n, false);
+
+    for(int i=0;i<n;i++) {
+        if(seen[i]) {
+            continue;
+        }
+        int count=1;
+        int j = i;
+        while(nums[j]!=i) {
+            j=nums[j];
+            count++;
+            seen[j] = true;
+        }
+        // times.push_back(count);
+        ret = ret*(count/gcd(ret,count));
+    }
+
+    cout<<ret<<endl;
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
+    ll t ;
     cin>>t;
     while(t--) {
         solve();
