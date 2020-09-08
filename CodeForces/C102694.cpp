@@ -48,14 +48,76 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+vector<vector<int> > graph;
+vector<vector<vector<int> > > paths;
 
+// void dfs(int start, int curr, vector<int> path, vector<bool> seen) {
+//     paths[start][curr] = path;
+//     seen[curr] = true;
+
+//     for(auto i:graph[curr]) {
+//         if(!seen[i]) {
+//             path.push_back(i);
+//             dfs(start,i,path,seen);
+//             path.pop_back();
+//         }
+//     }
+// }
+
+void reach(int curr, int end, vector<int> path, vector<bool> seen, vector<int>& ret) {
+    if(curr == end) {
+        ret = path;
+        return;
+    }
+    seen[curr] = true;
+
+    for(auto i:graph[curr]) {
+        if(!seen[i]) {
+            path.push_back(i);
+            reach(i,end,path,seen,ret);
+            path.pop_back();
+        }
+    }
+}
+
+void solve() {
+    int n = getInt();
+    graph.resize(n+1);
+
+    for(int i=1;i<n;i++) {
+        int a=getInt(), b=getInt();
+        graph[a].push_back(b);
+        graph[b].push_back(a);
+    }
+
+    // paths = vector<vector<vector<int> > >(n+1, vector<vector<int> >(n+1));
+
+    // for(int i=1;i<=n;i++) {
+    //     vector<bool> seen(n+1,false);
+    //     dfs(i,i,{},seen);
+    // }
+
+    int q = getInt();
+
+    while(q--) {
+        int a,b,c;
+        cin>>a>>b>>c;
+        vector<bool> seen(n+1,false);
+        vector<int> v;
+        reach(a,b,{},seen,v);
+
+        if(v.size() <= c) {
+            cout<<b<<endl;
+        } else {
+            cout<<v[c-1]<<endl;
+        }
+    }
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t=1;
+    // cin>>t;
     while(t--) {
         solve();
     }

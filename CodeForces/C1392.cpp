@@ -1,3 +1,4 @@
+
 /////////////////             ____ ___ _ _  _           *******************************
 /////////////////            |  _ \_ _/ | || |          *******************************
 /////////////////            | |_) | || | || |_         *******************************
@@ -27,12 +28,6 @@ vector<int> getVector(int n) {
     return ret;
 }
 
-int getInt() {
-    int n;
-    cin>>n;
-    return n;
-}
-
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
 
@@ -49,7 +44,17 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    auto nums = getVector(n);
 
+    int ret=0;
+    for(int i=n-1;i>0;i--) {
+        if(nums[i] < nums[i-1]) {
+            ret+=nums[i-1] - nums[i];
+        }
+    }
+    cout<<ret<<endl;
 }
 
 int32_t main() {

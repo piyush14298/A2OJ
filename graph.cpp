@@ -1,3 +1,4 @@
+
 /////////////////             ____ ___ _ _  _           *******************************
 /////////////////            |  _ \_ _/ | || |          *******************************
 /////////////////            | |_) | || | || |_         *******************************
@@ -19,19 +20,6 @@ using namespace std;
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
 #define endl "\n"
 
-vector<int> getVector(int n) {
-    vector<int> ret(n);
-    for(int i=0;i<n;i++) {
-        cin>>ret[i];
-    }
-    return ret;
-}
-
-int getInt() {
-    int n;
-    cin>>n;
-    return n;
-}
 
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
@@ -48,14 +36,40 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+int distanceFromTo(int a, int b) {
+    if(a==b) {
+        return 0;
+    }
+    int ret=0;
+    while(a!=b) {
+        int ans=1;
+        for(int i=2;i*i<=a;i++) {
+            if(a%i==0) {
+                ans = a/i;
+                break;
+            }
+        }
+        a =ans;
+        ret++;
+    }
 
+    return ret;
+}
+
+void solve() {
+    int m,n;
+    cin>>n>>m;
+    int g = __gcd(m,n);
+
+    int ret = distanceFromTo(m,g)+distanceFromTo(n,g);
+
+    cout<<ret<<"";
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t = 1;
+    // cin>>t;
     while(t--) {
         solve();
     }

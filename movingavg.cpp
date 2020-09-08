@@ -1,3 +1,4 @@
+
 /////////////////             ____ ___ _ _  _           *******************************
 /////////////////            |  _ \_ _/ | || |          *******************************
 /////////////////            | |_) | || | || |_         *******************************
@@ -19,19 +20,6 @@ using namespace std;
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
 #define endl "\n"
 
-vector<int> getVector(int n) {
-    vector<int> ret(n);
-    for(int i=0;i<n;i++) {
-        cin>>ret[i];
-    }
-    return ret;
-}
-
-int getInt() {
-    int n;
-    cin>>n;
-    return n;
-}
 
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
@@ -49,13 +37,69 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int a,b;
+    cin>>a>>b;
+    int n;
+    cin>>n;
+    vector<double> prices(n),sums(n+1,0);
+    for(int i=0;i<n;i++) {
+        cin>>prices[i];
+        sums[i+1] = sums[i] + prices[i];
+    }
 
+    vector<double> movAvX(n,0), movAvY(n,0);
+
+    for(int i=a-1;i<n;i++) {
+        movAvX[i] = (sums[i+1]-sums[i+1-a]) / a;
+    }
+
+    for(int i=b-1;i<n;i++) {
+        movAvY[i] = (sums[i+1]-sums[i+1-b]) / b;
+    }
+
+    // for(double i:movAvX) {
+    //     cout<<i<<" ";
+    // }
+    // cout<<endl;
+
+    // for(double i:movAvY) {
+    //     cout<<i<<" ";
+    // }
+    // cout<<endl;
+
+    int c = max(a,b) - 1;
+
+    while(c < n && movAvX[c] == movAvY[c]) c++;
+
+    if(c==n) {
+        cout<<0<<"";
+        return;
+    }
+
+    bool Xsmaller = movAvX[c] < movAvY[c];
+    int ret = 0;
+
+    for(int i=c+1;i<n;i++) {
+        if(movAvX[i] < movAvY[i]) {
+            if(!Xsmaller) {
+                ret++;
+                Xsmaller = true;
+            }
+        } else if(movAvX[i] > movAvY[i]) {
+            if(Xsmaller) {
+                ret++;
+                Xsmaller = false;
+            }
+        }
+    }
+    
+    cout<<ret<<"";
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t = 1;
+    // cin>>t;
     while(t--) {
         solve();
     }

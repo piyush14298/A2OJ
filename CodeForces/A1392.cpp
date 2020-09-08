@@ -1,3 +1,4 @@
+
 /////////////////             ____ ___ _ _  _           *******************************
 /////////////////            |  _ \_ _/ | || |          *******************************
 /////////////////            | |_) | || | || |_         *******************************
@@ -19,19 +20,6 @@ using namespace std;
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
 #define endl "\n"
 
-vector<int> getVector(int n) {
-    vector<int> ret(n);
-    for(int i=0;i<n;i++) {
-        cin>>ret[i];
-    }
-    return ret;
-}
-
-int getInt() {
-    int n;
-    cin>>n;
-    return n;
-}
 
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
@@ -49,7 +37,24 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    int t;
+    cin>>t;
+    bool diff = false;
+    for(int i=0;i<n-1;i++) {
+        int a;
+        cin>>a;
+        if(a!=t) {
+            diff= true;
+        }
+    }
 
+    if(diff) {
+        cout<<1<<endl;
+    } else {
+        cout<<n<<endl;
+    }
 }
 
 int32_t main() {

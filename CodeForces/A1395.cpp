@@ -1,3 +1,4 @@
+
 /////////////////             ____ ___ _ _  _           *******************************
 /////////////////            |  _ \_ _/ | || |          *******************************
 /////////////////            | |_) | || | || |_         *******************************
@@ -19,19 +20,6 @@ using namespace std;
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
 #define endl "\n"
 
-vector<int> getVector(int n) {
-    vector<int> ret(n);
-    for(int i=0;i<n;i++) {
-        cin>>ret[i];
-    }
-    return ret;
-}
-
-int getInt() {
-    int n;
-    cin>>n;
-    return n;
-}
 
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
@@ -48,8 +36,29 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+int numsOdds(vector<int> v) {
+    int ret=0;
+    for(int i:v) {
+        if(i&1) {
+            ret++;
+        }
+    }
+    return ret;
+}
 
+void solve() {
+    int r,g,b,w;
+    cin>>r>>g>>b>>w;
+
+    if(numsOdds({r,g,b,w})<=1) {
+        cout<<"Yes"<<endl;
+    } else {
+        if(r&&g&&b&&numsOdds({r-1,g-1,b-1,w+3})<=1) {
+            cout<<"YES"<<endl;
+        } else {
+            cout<<"No"<<endl;
+        }
+    }
 }
 
 int32_t main() {

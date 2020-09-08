@@ -1,3 +1,4 @@
+
 /////////////////             ____ ___ _ _  _           *******************************
 /////////////////            |  _ \_ _/ | || |          *******************************
 /////////////////            | |_) | || | || |_         *******************************
@@ -27,12 +28,6 @@ vector<int> getVector(int n) {
     return ret;
 }
 
-int getInt() {
-    int n;
-    cin>>n;
-    return n;
-}
-
 ll min(ll a, ll b) {return a<b?a:b;}
 ll max(ll a, ll b) {return a>b?a:b;}
 
@@ -49,7 +44,23 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n,t;
+    cin>>n>>t;
+    auto nums = getVector(n);
+    t = t%2;
+    t=2-t;
 
+    for(int i=0;i<t;i++) {
+        int g = *max_element(nums.begin(), nums.end());
+        for(auto& j:nums) {
+            j = g-j;
+        } 
+    }
+
+    for(int i:nums) {
+        cout<<i<<" ";
+    }
+    cout<<endl;
 }
 
 int32_t main() {
