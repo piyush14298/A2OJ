@@ -17,7 +17,7 @@ using namespace std;
 #define ll int
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
-#define endl "\n"
+#define Endl "\n"
 
 vector<int> getVector(int n) {
     vector<int> ret(n);
@@ -63,13 +63,20 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
-
+    int n;
+    cin>>n;
+    if(n%2!=0 || n==2) {
+        cout<<"NO"<<Endl;
+    } else
+    {
+        cout<<"YES"<<endl;
+    }
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t=1;
+    // cin>>t;
     while(t--) {
         solve();
     }

@@ -13,7 +13,7 @@
 // #include<set>
 // #include<algorithm>
 using namespace std;
-#define int int64_t
+#define int long long
 #define ll int
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
@@ -63,13 +63,27 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n,m;
+    cin>>n>>m;
+    vector<int> a = getVector(n),b = getVector(m);
+    sort(a.begin(), a.end());
+    int G = n==1?0:a[1]-a[0];
 
+    for(int i=2;i<n;i++) {
+        G = gcd(G,a[i]-a[0]);
+    }
+
+    for(int i=0;i<m;i++) {
+        cout<<gcd(a[0] + b[i], G)<<" ";
+    }
+
+    cout<<endl;
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t=1;
+    // cin>>t;
     while(t--) {
         solve();
     }

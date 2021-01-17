@@ -63,7 +63,25 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    vector<int> a(n),b(n);
+    int sm=INT_MAX;
+    for(int i=0;i<n;i++) {
+        cin>>a[i];
+        b[i] = a[i];
+        sm = min(a[i],sm);
+    }
 
+    sort(b.begin(), b.end());
+
+    for(int i=0;i<n;i++) {
+        if(a[i]!=b[i] && a[i]%sm!=0) {
+            cout<<"NO"<<endl;
+            return;
+        }
+    }
+    cout<<"YES"<<endl;
 }
 
 int32_t main() {

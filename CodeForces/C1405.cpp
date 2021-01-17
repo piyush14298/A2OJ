@@ -63,7 +63,56 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n,k;
+    cin>>n>>k;
+    string nums;
+    cin>>nums;
+    int ones=0,zeros=0;
 
+    for(int i=0;i<k;i++) {
+        bool o=false,z=false;
+        int j=i;
+        while(j < n) {
+            if(nums[j]=='1') {
+                o=true;
+            } else if(nums[j] == '0') {
+                z=true;
+            }
+            j+=k;
+        }
+        if(o&&z) {
+            cout<<"NO"<<endl;
+            return;
+        }
+        if(o) {
+            int j=i;
+            while(j < n) {
+                if(nums[j]=='?') {
+                    nums[j] = '1';
+                }
+                j+=k;
+            }
+        } else if(z){
+            int j=i;
+            while(j < n) {
+                if(nums[j]=='?') {
+                    nums[j] = '0';
+                }
+                j+=k;
+            }
+        }
+    }
+
+    for(int i=0;i<k;i++) {
+        if(nums[i]=='1') ones++;
+        else if(nums[i]=='0') zeros++;
+    }
+    // cout<<nums<<endl;
+    if(abs(ones-zeros) <= (k - (ones+zeros))) {
+        cout<<"YES"<<endl;
+    } else {
+        cout<<"NO"<<endl;
+    }
 }
 
 int32_t main() {

@@ -63,7 +63,33 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int g;
+    cin>>g;
+    while(g--) {
+        int I,N,Q;
+        cin>>I>>N>>Q;
 
+        int heads=0, tails=0;
+
+        if(N%2==0) {
+            heads = N/2;
+            tails = N/2;
+        } else {
+            if(I&1) {
+                heads=N/2;
+                tails=heads+1;
+            } else {
+                tails=N/2;
+                heads=tails+1;
+            }
+        }
+
+        if(Q==1) {
+            cout<<heads<<endl;
+        } else {
+            cout<<tails<<endl;
+        }
+    }
 }
 
 int32_t main() {

@@ -63,7 +63,13 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int a,b,c,x,y,z;
+    cin>>a>>b>>c>>x>>y>>z;
 
+    int p,q,r;
+
+    p = 2*(min(c,y)) + 1*min(max(0,c-y-x), z);
+    q = max(0, y-c) + 
 }
 
 int32_t main() {

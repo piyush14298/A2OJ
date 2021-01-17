@@ -13,11 +13,11 @@
 // #include<set>
 // #include<algorithm>
 using namespace std;
-#define int int64_t
+#define int unsigned long long
 #define ll int
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
-#define endl "\n"
+// #define endl "\n"
 
 vector<int> getVector(int n) {
     vector<int> ret(n);
@@ -63,15 +63,46 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    int k = (1<<20);
+    cout<<"1 "<<k<<endl;
+    int sum;
+    cin>>sum;
+    sum -= (n * k);
+    
+    int ret=0;
+    if(sum&1) ret^=1;
 
+    for(int i=1;i<20;i++) {
+        int num=(1<<i);
+        cout<<"1 "<<num<<endl;
+        int tempSum;
+        cin>>tempSum;
+
+        // if(sum + n*num == tempSum) {
+        //     break;
+        // }
+        int y = (n - ((tempSum - sum)/num))/2;
+
+        if(y&1) {
+            ret^=num;
+        }
+    }
+    cout<<"2 "<<ret<<endl;
 }
 
 int32_t main() {
-    GO_BABY_GO;
+    // GO_BABY_GO;
     ll t;
     cin>>t;
     while(t--) {
         solve();
+        int x;
+        cin>>x;
+        if(x==-1) {
+            return 0;
+        }
     }
     return 0;
 }

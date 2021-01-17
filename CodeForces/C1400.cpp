@@ -62,8 +62,68 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+bool check(vector<char>& ret, string s, int x) {
+    string t="";
+    int n = s.size();
 
+    for(int i=0;i<s.size();i++) {
+        if(i-x>=0 && i+x<n) {
+            if(ret[i-x]=='1' || ret[i+x] == '1') {
+                t+="1";
+            } else {
+                t+="0";
+            }
+        } else if(i-x>=0) {
+            if(ret[i-x]=='1') {
+                t+="1";
+            } else {
+                t+="0";
+            }
+        } else if(i+x<n) {
+            if(ret[i+x]=='1') {
+                t+="1";
+            } else {
+                t+="0";
+            }
+        } else {
+            t+="0";
+        }
+    }
+    return t==s;
+}
+
+void solve() {
+    int x;
+    string s;
+    cin>>s>>x;
+
+    vector<char> ret(s.size(),'1');
+
+    for(int i=0;i<s.size();i++) {
+        if(i-x<0 && i+x>=s.size()) {
+            continue;
+        } else if(i-x < 0) {
+            ret[i+x] = s[i];
+        } else if(i+x >= s.size()) {
+            ret[i-x] = s[i];
+        } else if(s[i] == '0') {
+            ret[i-x] = ret[i+x] = '0';
+        }
+    }
+
+    if(!check(ret, s, x)) {
+        cout<<"-1"<<endl;
+        return;
+    }
+
+    for(char c:ret) {
+        if(c == '2') {
+            cout<<"1";
+        } else {
+            cout<<c;
+        }
+    }
+    cout<<endl;
 }
 
 int32_t main() {

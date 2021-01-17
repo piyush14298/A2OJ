@@ -63,13 +63,35 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n,k;
+    cin>>n>>k;
+    auto nums = getVector(n);
+    unordered_map<int, int> count;
+    vector<int> newNum;
 
+    for(int i:nums) {
+        if(!count[i]) {
+            newNum.push_back(i);
+        }
+        count[i]++;
+    }
+
+    sort(newNum.begin(), newNum.end(), greater<int>());
+
+    int ret=0;
+    for(int i=0;i<newNum.size() && ret<k;i++) {
+        if(newNum[i] <= 0) {
+            break;
+        }
+        ret+=count[newNum[i]];
+    }
+    cout<<ret<<endl;
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t=1;
+    // cin>>t;
     while(t--) {
         solve();
     }

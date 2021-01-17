@@ -63,7 +63,15 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
-
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    string ret="";
+    for(int i=0;i<2*n-1;i+=2) {
+        ret+=s[i];
+    }
+    cout<<ret<<endl;
 }
 
 int32_t main() {

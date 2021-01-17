@@ -27,12 +27,6 @@ vector<int> getVector(int n) {
     return ret;
 }
 
-void printVector(vector<int>& nums) {
-    for(int i:nums) {
-        cout<<i<<" ";
-    }
-    cout<<endl;
-}
 
 int gcd(int a, int b) {
     if(b==0) {
@@ -63,7 +57,29 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    string red, blue;
+    cin>>red>>blue;
+    int r=0, b=0, e=0;
 
+    for(int i=0;i<n;i++) {
+        if(red[i] < blue[i]) {
+            b++;
+        } else if(red[i]>blue[i]) {
+            r++;
+        } else {
+            e++;
+        }
+    }
+
+    if(r>b) {
+        cout<<"RED"<<endl;
+    } else if(r<b) {
+        cout<<"BLUE"<<endl;
+    } else {
+        cout<<"EQUAL"<<endl;
+    }
 }
 
 int32_t main() {

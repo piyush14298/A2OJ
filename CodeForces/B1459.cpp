@@ -63,13 +63,22 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int  n;
+    cin>>n;
 
+    int k = n/2;
+
+    if(n%2==0) {
+        cout<<(k+1)*(k+1)<<endl;
+    } else {
+        cout<<2*(k+1)*(k+2)<<endl;
+    }
 }
 
 int32_t main() {
     GO_BABY_GO;
-    ll t;
-    cin>>t;
+    ll t=1;
+    // cin>>t;
     while(t--) {
         solve();
     }

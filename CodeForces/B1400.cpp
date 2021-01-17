@@ -62,8 +62,42 @@ ll max(ll a, ll b) {return a>b?a:b;}
  * |5.| INT_MIN    | Minimum value int               |-2,147,483,648 (10^10)
 */
 
-void solve() {
+int helper(int p, int f, int cnts, int cntw, int s, int w) {
+    int retS=0,retW=0;
 
+    int temp = min(f/s,cnts);
+    retS+=temp;cnts-=temp;f-=(temp*s);
+
+    temp = min(p/w,cntw);
+    retW+=temp;cntw-=temp;p-=(temp*w);
+
+    temp = min(f/w,cntw);
+    retW+=temp;cntw-=temp;f-=(temp*w);
+
+    return retS+retW;
+}
+
+void solve() {
+    int p,f,cnts,cntw,s,w;
+    cin>>p>>f>>cnts>>cntw>>s>>w;
+    if(s>w) {
+        swap(s,w);
+        swap(cnts,cntw);
+    }
+
+    int ret = 0;
+
+    for(int i=0;i<=cnts;i++) {
+        if(s*i <= p) {
+            ret = max(ret, i + helper(p-i*s,f,cnts-i,cntw,s,w));
+        } else {
+            break;
+        }
+    }
+
+    cout<<ret<<endl;
+
+    
 }
 
 int32_t main() {

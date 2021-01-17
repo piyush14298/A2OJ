@@ -27,7 +27,7 @@ vector<int> getVector(int n) {
     return ret;
 }
 
-void printVector(vector<int>& nums) {
+vector<int> printVector(vector<int>& nums) {
     for(int i:nums) {
         cout<<i<<" ";
     }
@@ -63,7 +63,16 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    auto nums = getVector(n);
+    int curr=0,ret=0;
 
+    for(int i=n-1;i>=0;i--) {
+        curr+=nums[i];
+        ret = max(curr,ret);
+    }
+    cout<<ret<<endl;
 }
 
 int32_t main() {

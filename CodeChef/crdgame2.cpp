@@ -13,11 +13,12 @@
 // #include<set>
 // #include<algorithm>
 using namespace std;
-#define int int64_t
+#define int long long
 #define ll int
 #define ull unsigned long long
 #define GO_BABY_GO ios::sync_with_stdio(false); cin.tie(NULL);
 #define endl "\n"
+#define MOD 1000000007
 
 vector<int> getVector(int n) {
     vector<int> ret(n);
@@ -34,6 +35,27 @@ void printVector(vector<int>& nums) {
     cout<<endl;
 }
 
+int power(int a, int n) {
+    if(n==0) {
+        return 1;
+    }
+    int base=a, ret=a, currP=1, addP=1;
+
+    while(currP < n) {
+        if(currP + addP > n) {
+            addP=1;
+            base=a;
+        }
+        ret = ret%MOD * base%MOD;
+        ret%=MOD;
+        base = base%MOD * base%MOD;
+        base%=MOD;
+        currP+=addP;
+        addP+=addP;
+    }
+    return ret%MOD;
+}
+
 int gcd(int a, int b) {
     if(b==0) {
         return a;
@@ -45,6 +67,23 @@ int getInt() {
     int n;
     cin>>n;
     return n;
+}
+
+int divide(int a, int b) {
+    return (a%MOD * power(b,MOD-2)%MOD)%MOD;
+}
+
+int C(int n, int r) {
+    int ret=1, den=1;
+    r = min(r,n-r);
+    if(r==1) {
+        return n;
+    }
+    for(int i=1;i<=r;i++) {
+        ret = (ret%MOD * (n-i+1)%MOD)%MOD;
+        ret = divide(ret, i);
+    }
+    return ret%MOD;
 }
 
 ll min(ll a, ll b) {return a<b?a:b;}
@@ -63,6 +102,37 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
+    int n;
+    cin>>n;
+    auto nums = getVector(n);
+
+    if(n==1) {
+        cout<<2<<endl;
+        return;
+    }
+
+    int grt=0, num_max=0;
+
+    for(int i: nums) {
+        if(i>grt) {
+            num_max = 1;
+            grt = i;
+        } else if(i==grt) {
+            num_max++;
+        }
+    }
+
+    int ret = power(2,n) % MOD;
+
+    if(num_max %2 ==0) {
+        ret = ret - (power(2, n - num_max)%MOD * C(num_max, num_max/2)%MOD) %MOD;
+    }
+
+    if(ret<0) {
+        ret+=MOD;
+    }
+
+    cout<<ret%MOD<<endl;
 
 }
 

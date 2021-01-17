@@ -63,7 +63,21 @@ ll max(ll a, ll b) {return a>b?a:b;}
 */
 
 void solve() {
-
+    int n;
+    cin>>n;
+    auto nums = getVector(n);
+    unordered_map<int,int> count;
+    vector<int> left(n+5,0);
+    int ret=0;
+    for(int j=0;j<n;j++) {
+        vector<int> right(n+5,0);
+        for(int k=n-1;k>j;k--) {
+            ret+=(left[nums[k]] * right[nums[j]]);
+            right[nums[k]]++;
+        }
+        left[nums[j]]++;
+    }
+    cout<<ret<<endl;
 }
 
 int32_t main() {
